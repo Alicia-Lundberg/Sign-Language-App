@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
 
 export default function LessonDetail() {
@@ -12,25 +13,33 @@ export default function LessonDetail() {
   const current = level.lessons[step]
   const [answered, setAnswered] = useState(false)
   const [correct, setCorrect] = useState(false)
+  const { completeLesson } = useProgress()
 
   const handleAnswer = (index) => {
-    const isCorrect = index === current.correct
     setAnswered(true)
-    setCorrect(isCorrect)
-
-    if (isCorrect) {
-      setTimeout(() => {
-        if (step + 1 < level.lessons.length) {
-          setStep(step + 1)
-          setAnswered(false)
-        } else {
-          router.push('/(tabs)/home')
-        }
-      }, 1000)
-    }
+    setCorrect(index === current.correct)
+    current.userAnswer = index
   }
 
   const progress = ((step + 1) / level.lessons.length) * 100
+
+  const handleContinue = () => {
+  if (step + 1 < level.lessons.length) {
+    setStep(step + 1)
+    setAnswered(false)
+    setCorrect(false)
+  } else {
+    // Kontrollera att alla lektioner i level är rätt besvarade
+    const allCorrect = level.lessons.every(l => l.userAnswer === l.correct)
+    console.log('All questions correct for level', level.id, '?', allCorrect) // debug
+    if (allCorrect) {
+      console.log('Calling completeLesson for level', level.id) // debug
+      completeLesson(level.id) // låser upp nästa level
+    }
+    router.push('/(tabs)/home')
+  }
+}
+
 
   return (
     <View style={styles.container}>
@@ -90,9 +99,24 @@ export default function LessonDetail() {
       </View>
 
       {answered && (
-        <Text style={{ marginTop: 20, fontSize: 18 }}>
-          {correct ? 'Rätt!' : 'Fel, försök igen'}
-        </Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#27AE60',
+            paddingVertical: 20,
+            paddingHorizontal: 40,
+            borderRadius: 12,
+            marginTop: 30,
+            width: '90%',
+            alignItems: 'center',
+            position: 'absolute',
+            bottom: 40
+          }}
+          onPress={() => {
+            handleContinue()
+          }}
+        >
+          <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>Fortsätt</Text>
+        </TouchableOpacity>
       )}
     </View>
   )

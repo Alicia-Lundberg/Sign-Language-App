@@ -1,9 +1,11 @@
+//state för att hålla koll på hur man går fram i appen
+
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ProgressProvider } from './context/ProgressContext';
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -14,13 +16,10 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'light' ? DefaultTheme : DarkTheme}>
-
-      <Stack screenOptions={{ headerShown: false }} />
-      {/* <Stack> Removed header on all screens
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack> */}
-      <StatusBar style="auto" />
+      <ProgressProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+        <StatusBar style="auto" />
+      </ProgressProvider>
     </ThemeProvider>
   );
 }

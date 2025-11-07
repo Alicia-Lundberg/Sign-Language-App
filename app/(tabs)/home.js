@@ -1,36 +1,24 @@
 import { router } from 'expo-router'
-import { useState } from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { lessonsData } from '../data/lessons'
+import { useProgress } from '../context/ProgressContext'
 
 export default function HomeScreen() {
-  const [lessons, setLessons] = useState(
-    lessonsData.map((l, index) => ({ ...l, completed: false })) // alla startar låsta
-  )
-
-  // Hjälpvariabel för att veta vilken som är nästa unlocked
-  const getNextUnlocked = () => {
-    const completedLessons = lessons.filter(l => l.completed)
-    const nextIndex = completedLessons.length
-    return lessons[nextIndex]?.id
-  }
-
-  const nextUnlockedId = getNextUnlocked()
+  const { lessons } = useProgress()  // <-- använder context istället
+  console.log('Lessons state in HomeScreen:', lessons) // debug
+  const nextUnlockedId = lessons.find(l => l.unlocked && !l.completed)?.id
 
   const handlePress = (lesson) => {
-    // Kan bara klicka på completed eller nästa unlocked
-    if (!lesson.completed && lesson.id !== nextUnlockedId) return
-
+    console.log('Pressed lesson', lesson.id, 'unlocked?', lesson.unlocked, 'completed?', lesson.completed)
+    if (!lesson.unlocked) return
     router.push(`/lesson/${lesson.id}`)
   }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {lessons.map((lesson, index) => {
-        let circleStyle = styles.locked
-
+        // Bestäm färg på cirkeln
+        let circleStyle = lesson.unlocked ? styles.unlocked : styles.locked
         if (lesson.completed) circleStyle = styles.completed
-        else if (lesson.id === nextUnlockedId) circleStyle = styles.unlocked
 
         return (
           <View key={lesson.id} style={styles.lessonWrapper}>
@@ -56,7 +44,7 @@ const styles = StyleSheet.create({
   circle: { width: 60, height: 60, borderRadius: 30, justifyContent: 'center', alignItems: 'center', marginBottom: 5 },
   circleText: { color: 'white', fontWeight: 'bold', fontSize: 18 },
   completed: { backgroundColor: '#27AE60' },   // grön
-  unlocked: { backgroundColor: '#4A90E2' },    // blå
-  locked: { backgroundColor: '#999' },         // grå
+  unlocked: { backgroundColor: '#4A90E2' },   // blå
+  locked: { backgroundColor: '#999' },        // grå
   lessonTitle: { fontSize: 16, marginTop: 5 },
 })
