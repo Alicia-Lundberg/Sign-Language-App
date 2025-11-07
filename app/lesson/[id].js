@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
 
@@ -24,27 +24,28 @@ export default function LessonDetail() {
   const progress = ((step + 1) / level.lessons.length) * 100
 
   const handleContinue = () => {
-  if (step + 1 < level.lessons.length) {
-    setStep(step + 1)
-    setAnswered(false)
-    setCorrect(false)
-  } else {
-    // Kontrollera att alla lektioner i level är rätt besvarade
-    const allCorrect = level.lessons.every(l => l.userAnswer === l.correct)
-    console.log('All questions correct for level', level.id, '?', allCorrect) // debug
-    if (allCorrect) {
-      console.log('Calling completeLesson for level', level.id) // debug
-      completeLesson(level.id) // låser upp nästa level
+    if (step + 1 < level.lessons.length) {
+      setStep(step + 1)
+      setAnswered(false)
+      setCorrect(false)
+    } else {
+      // Kontrollera att alla lektioner i level är rätt besvarade
+      const allCorrect = level.lessons.every(l => l.userAnswer === l.correct)
+      console.log('All questions correct for level', level.id, '?', allCorrect) // debug
+      if (allCorrect) {
+        console.log('Calling completeLesson for level', level.id) // debug
+        completeLesson(level.id) // låser upp nästa level
+      }
+      router.push('/(tabs)/home')
     }
-    router.push('/(tabs)/home')
   }
-}
 
 
   return (
     <View style={styles.container}>
-     <View style={{ width: '100%', paddingTop: 50, paddingHorizontal: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ width: '100%', paddingTop: 50, paddingHorizontal: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
         {/* Kryss-knapp*/}
+
         <TouchableOpacity
           style={{ padding: 10 }}
           onPress={() => router.push('/(tabs)/home')}
@@ -70,12 +71,16 @@ export default function LessonDetail() {
          {level.title} {/*– {step + 1}/{level.lessons.length}
       </Text> */}
 
-      
-      
 
-      <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
+
+
+      {/* <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
         <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
-      </View>
+      </View> */}
+      <Image
+        source={require('../../assets/gifs/hej-00032-tecken-unscreen.gif')}
+        style={{ width: 300, height: 250 }}
+      />
 
       <Text style={styles.question}>{current.question}</Text>
 
@@ -88,8 +93,8 @@ export default function LessonDetail() {
               answered && (i === current.correct
                 ? styles.correct
                 : i === current.options.findIndex((_, idx) => idx === i && !correct)
-                ? styles.wrong
-                : {})
+                  ? styles.wrong
+                  : {})
             ]}
             onPress={() => !answered && handleAnswer(i)}
           >
