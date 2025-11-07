@@ -13,7 +13,8 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === 'light' ? DefaultTheme : DarkTheme}>
+
       <Stack screenOptions={{ headerShown: false }} />
       {/* <Stack> Removed header on all screens
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

@@ -34,17 +34,37 @@ export default function LessonDetail() {
 
   return (
     <View style={styles.container}>
+     <View style={{ width: '100%', paddingTop: 50, paddingHorizontal: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        {/* Kryss-knapp*/}
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => router.push('/(tabs)/home')}
+        >
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'black' }}>✕</Text>
+        </TouchableOpacity>
+
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'black', textAlign: 'center', flex: 1 }}>
+          {level.title}
+        </Text>
+
+        <View style={{ width: 44 /* samma som kryss-knappens bredd */ }} />
+      </View>
+
+
 
       {/* Progress bar */}
-      <View style={[styles.progressBarBackground, { marginTop: 40 }]}>
+      <View style={[styles.progressBarBackground, { marginTop: 30 }]}>
         <View style={[styles.progressBarFill, { width: `${progress}%`, backgroundColor: '#27AE60' }]} />
       </View>
 
-      <Text style={styles.title}>
-        {level.title} – {step + 1}/{level.lessons.length}
-      </Text>
+      {/* <Text style={styles.title}>
+         {level.title} {/*– {step + 1}/{level.lessons.length}
+      </Text> */}
 
-      <View style={styles.videoPlaceholder}>
+      
+      
+
+      <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
         <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
       </View>
 
