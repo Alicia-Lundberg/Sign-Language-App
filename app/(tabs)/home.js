@@ -14,37 +14,59 @@ export default function HomeScreen() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {lessons.map((lesson, index) => {
-        // Bestäm färg på cirkeln
-        let circleStyle = lesson.unlocked ? styles.unlocked : styles.locked
-        if (lesson.completed) circleStyle = styles.completed
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      {/* <ImageBackground
+        source={require('../../assets/images/background.png')} // lång bakgrundsbild
+        style={styles.background}
+      > */}
+        {lessons.map(lesson => {
+          let circleStyle = lesson.unlocked ? styles.unlocked : styles.locked
+          if (lesson.completed) circleStyle = styles.completed
 
-        return (
-          <View key={lesson.id} style={styles.lessonWrapper}>
-            {index !== 0 && <View style={styles.line} />}
-            <TouchableOpacity
-              style={[styles.circle, circleStyle]}
-              onPress={() => handlePress(lesson)}
+          return (
+            <View
+              key={lesson.id}
+              style={{
+                position: 'absolute',
+                top: lesson.top,
+                left: lesson.left,
+                alignItems: 'center',
+              }}
             >
-              <Text style={styles.circleText}>{lesson.id}</Text>
-            </TouchableOpacity>
-            <Text style={styles.lessonTitle}>{lesson.title}</Text>
-          </View>
-        )
-      })}
+              <TouchableOpacity
+                style={[styles.circle, circleStyle]}
+                onPress={() => handlePress(lesson)}
+              >
+                <Text style={styles.circleText}>{lesson.id}</Text>
+              </TouchableOpacity>
+              <Text style={styles.lessonTitle}>{lesson.title}</Text>
+            </View>
+          )
+        })}
+     
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { paddingVertical: 50, alignItems: 'center' },
-  lessonWrapper: { alignItems: 'center', marginBottom: 30 },
-  line: { width: 4, height: 30, backgroundColor: '#ccc', marginBottom: 10 },
-  circle: { width: 60, height: 60, borderRadius: 30, justifyContent: 'center', alignItems: 'center', marginBottom: 5 },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+  background: {
+    width: '100%',
+    height: 1200, // t.ex. höjden på den långa bilden
+  },
+  circle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
   circleText: { color: 'white', fontWeight: 'bold', fontSize: 18 },
-  completed: { backgroundColor: '#27AE60' },   // grön
-  unlocked: { backgroundColor: '#4A90E2' },   // blå
-  locked: { backgroundColor: '#999' },        // grå
-  lessonTitle: { fontSize: 16, marginTop: 5 },
+  completed: { backgroundColor: '#27AE60' },
+  unlocked: { backgroundColor: '#4A90E2' },
+  locked: { backgroundColor: '#999' },
+  lessonTitle: { fontSize: 16, marginTop: 5, color: 'white' },
 })
