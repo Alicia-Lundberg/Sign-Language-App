@@ -1,6 +1,8 @@
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import DragAndDropQuestion from '../components/questions/DragAndDropQuestion'
+import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
 import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
 
@@ -21,7 +23,7 @@ export default function LessonDetail() {
     current.userAnswer = index
   }
 
-  const progress = ((step + 1) / level.lessons.length) * 100
+  const progress = (step / level.lessons.length) * 100
 
   const handleContinue = () => {
     if (step + 1 < level.lessons.length) {
@@ -39,7 +41,6 @@ export default function LessonDetail() {
       router.push('/(tabs)/home')
     }
   }
-
 
   return (
     <View style={styles.container}>
@@ -71,9 +72,6 @@ export default function LessonDetail() {
          {level.title} {/*– {step + 1}/{level.lessons.length}
       </Text> */}
 
-
-
-
       {/* <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
         <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
       </View> */}
@@ -84,7 +82,7 @@ export default function LessonDetail() {
 
       <Text style={styles.question}>{current.question}</Text>
 
-      <View style={styles.optionsGrid}>
+      {/* <View style={styles.optionsGrid}>
         {current.options.map((opt, i) => (
           <TouchableOpacity
             key={i}
@@ -101,7 +99,24 @@ export default function LessonDetail() {
             <Text style={styles.optionText}>{opt}</Text>
           </TouchableOpacity>
         ))}
-      </View>
+      </View> */}
+
+      {current.type === 'multipleChoice' && (
+        <MultipleChoiceQuestion
+          current={current}
+          answered={answered}
+          correct={correct}
+          handleAnswer={handleAnswer}
+        />
+      )}
+
+      {current.type === 'dragAndDrop' && (
+        <DragAndDropQuestion
+          current={current}
+          answered={answered}
+          onComplete={() => setAnswered(true)}
+        />
+      )}
 
       {answered && (
         <TouchableOpacity
