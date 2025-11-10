@@ -1,6 +1,6 @@
 // app/data/lessons.js
 
-// Map all your GIFs here
+// Map all GIFs here
 export const gifMap = {
   //level 1
   hej: require('../../assets/gifs/level_1/hej.gif'),
