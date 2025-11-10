@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
-import bg from '../../assets/images/path-bg-new.png';
+import bg from '../../assets/images/path-bg-v3.png';
 import Elk from '../../assets/svgs/elk.svg';
 import Stubbe from '../../assets/svgs/stubbe.svg';
 import { useProgress } from '../context/ProgressContext';
