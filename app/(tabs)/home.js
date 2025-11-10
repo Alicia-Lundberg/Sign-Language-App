@@ -1,35 +1,43 @@
 import { router } from 'expo-router'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
+import bg from '../../assets/images/path_bg.png'
 import { useProgress } from '../context/ProgressContext'
 
 export default function HomeScreen() {
-  const { lessons } = useProgress()  // <-- använder context istället
-  console.log('Lessons state in HomeScreen:', lessons) // debug
-  const nextUnlockedId = lessons.find(l => l.unlocked && !l.completed)?.id
+  const { lessons } = useProgress()  // context med unlocked/completed
+  const { width: screenWidth } = useWindowDimensions()
+
+  // Bakgrundens naturliga mått från Inkscape
+  const bgWidth = 1080
+  const bgHeight = 5000
+  const scale = screenWidth / bgWidth
+  const scaledHeight = bgHeight * scale
 
   const handlePress = (lesson) => {
-    console.log('Pressed lesson', lesson.id, 'unlocked?', lesson.unlocked, 'completed?', lesson.completed)
     if (!lesson.unlocked) return
     router.push(`/lesson/${lesson.id}`)
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      {/* <ImageBackground
-        source={require('../../assets/images/background.png')} // lång bakgrundsbild
-        style={styles.background}
-      > */}
+    <ScrollView contentContainerStyle={{ height: scaledHeight }}>
+      <ImageBackground
+        source={bg}
+        style={{ width: screenWidth, height: scaledHeight }}
+      >
         {lessons.map(lesson => {
-          let circleStyle = lesson.unlocked ? styles.unlocked : styles.locked
-          if (lesson.completed) circleStyle = styles.completed
+          const circleStyle = lesson.completed
+            ? styles.completed
+            : lesson.unlocked
+            ? styles.unlocked
+            : styles.locked
 
           return (
             <View
               key={lesson.id}
               style={{
                 position: 'absolute',
-                top: lesson.top,
-                left: lesson.left,
+                top: lesson.top * scale,
+                left: lesson.left * scale,
                 alignItems: 'center',
               }}
             >
@@ -43,19 +51,12 @@ export default function HomeScreen() {
             </View>
           )
         })}
-     
+      </ImageBackground>
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-  },
-  background: {
-    width: '100%',
-    height: 1200, // t.ex. höjden på den långa bilden
-  },
   circle: {
     width: 60,
     height: 60,
