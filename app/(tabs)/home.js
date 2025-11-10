@@ -1,6 +1,6 @@
 import { router } from 'expo-router'
 import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
-import bg from '../../assets/images/path_bg.png'
+import bg from '../../assets/images/path-bg-new.png'
 import { useProgress } from '../context/ProgressContext'
 
 export default function HomeScreen() {
