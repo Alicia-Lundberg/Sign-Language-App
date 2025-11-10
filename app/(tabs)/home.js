@@ -1,22 +1,27 @@
-import { router } from 'expo-router'
-import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
-import bg from '../../assets/images/path-bg-new.png'
-import { useProgress } from '../context/ProgressContext'
+import { router } from 'expo-router';
+import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import bg from '../../assets/images/path-bg-new.png';
+import Elk from '../../assets/svgs/elk.svg';
+import Stubbe from '../../assets/svgs/stubbe.svg';
+import { useProgress } from '../context/ProgressContext';
 
 export default function HomeScreen() {
-  const { lessons } = useProgress()  // context med unlocked/completed
-  const { width: screenWidth } = useWindowDimensions()
+  const { lessons } = useProgress();
+  const { width: screenWidth } = useWindowDimensions();
 
   // Bakgrundens naturliga mått från Inkscape
-  const bgWidth = 1080
-  const bgHeight = 5000
-  const scale = screenWidth / bgWidth
-  const scaledHeight = bgHeight * scale
+  const bgWidth = 1080;
+  const bgHeight = 5000;
+  const scale = screenWidth / bgWidth;
+  const scaledHeight = bgHeight * scale;
 
   const handlePress = (lesson) => {
-    if (!lesson.unlocked) return
-    router.push(`/lesson/${lesson.id}`)
-  }
+    if (!lesson.unlocked) return;
+    router.push(`/lesson/${lesson.id}`);
+  };
+
+  // Hitta nästa upplåsta men ej avklarade lesson
+  const nextUnlockedLesson = lessons.find(l => l.unlocked && !l.completed);
 
   return (
     <ScrollView contentContainerStyle={{ height: scaledHeight }}>
@@ -24,15 +29,8 @@ export default function HomeScreen() {
         source={bg}
         style={{ width: screenWidth, height: scaledHeight }}
       >
-        {lessons.map(lesson => {
-          const circleStyle = lesson.completed
-            ? styles.completed
-            : lesson.unlocked
-            ? styles.unlocked
-            : styles.locked
-
-          return (
-            <View
+        {lessons.map(lesson => (
+          <View
               key={lesson.id}
               style={{
                 position: 'absolute',
@@ -41,19 +39,29 @@ export default function HomeScreen() {
                 alignItems: 'center',
               }}
             >
-              <TouchableOpacity
-                style={[styles.circle, circleStyle]}
-                onPress={() => handlePress(lesson)}
-              >
-                <Text style={styles.circleText}>{lesson.id}</Text>
+              <TouchableOpacity onPress={() => handlePress(lesson)} style={{ alignItems: 'center' }}>
+                <Stubbe 
+                  width={70} 
+                  height={70} 
+                  style={{ opacity: lesson.unlocked ? 1 : 0.5 }}
+                />
+
+                {lesson.id === nextUnlockedLesson?.id && (
+                  <Elk 
+                    width={100} 
+                    height={100} 
+                    style={{ position: 'absolute', top: -70, left: -15 }}
+                  />
+                )}
               </TouchableOpacity>
+
               <Text style={styles.lessonTitle}>{lesson.title}</Text>
             </View>
-          )
-        })}
+        ))}
+        
       </ImageBackground>
     </ScrollView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -70,4 +78,4 @@ const styles = StyleSheet.create({
   unlocked: { backgroundColor: '#4A90E2' },
   locked: { backgroundColor: '#999' },
   lessonTitle: { fontSize: 16, marginTop: 5, color: 'white' },
-})
+});
