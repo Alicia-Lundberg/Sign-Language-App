@@ -61,8 +61,6 @@ export default function LessonDetail() {
         <View style={{ width: 44 /* samma som kryss-knappens bredd */ }} />
       </View>
 
-
-
       {/* Progress bar */}
       <View style={[styles.progressBarBackground, { marginTop: 30 }]}>
         <View style={[styles.progressBarFill, { width: `${progress}%`, backgroundColor: '#27AE60' }]} />
@@ -76,30 +74,13 @@ export default function LessonDetail() {
         <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
       </View> */}
       <Image
-        source={require('../../assets/gifs/hej-00032-tecken-unscreen.gif')}
+        source={current.gif}
         style={{ width: 300, height: 250 }}
       />
 
       <Text style={styles.question}>{current.question}</Text>
 
-      {/* <View style={styles.optionsGrid}>
-        {current.options.map((opt, i) => (
-          <TouchableOpacity
-            key={i}
-            style={[
-              styles.optionButton,
-              answered && (i === current.correct
-                ? styles.correct
-                : i === current.options.findIndex((_, idx) => idx === i && !correct)
-                  ? styles.wrong
-                  : {})
-            ]}
-            onPress={() => !answered && handleAnswer(i)}
-          >
-            <Text style={styles.optionText}>{opt}</Text>
-          </TouchableOpacity>
-        ))}
-      </View> */}
+
 
       {current.type === 'multipleChoice' && (
         <MultipleChoiceQuestion
