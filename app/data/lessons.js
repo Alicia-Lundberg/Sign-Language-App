@@ -16,13 +16,13 @@ export const gifMap = {
 export const lessonsData = [
   {
     id: 1,
-    title: 'Level 1',
+    title: 'Level 1', //Hälsningsfraser
     lessons: [
-      { type: 'multipleChoice', question: 'Vad betyder A?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 0 },
-      { type: 'multipleChoice', question: 'Vad betyder B?', gif: gifMap.hej, options: ['A','B','C','D'], correct: 1 },
-      { type: 'multipleChoice', question: 'Vad betyder C?', gif: gifMap.jagHeter, options: ['A','C','B','D'], correct: 1 },
-      { type: 'multipleChoice', question: 'Vad är rätt här?', gif: gifMap.jagHeter, options: ['D','E','F','D'], correct: 0 },
-      { type: 'multipleChoice', question: 'Vad visas här?', gif: gifMap.jagHeter, options: ['G','E','F','D'], correct: 1 },
+      { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.hej, options: ['Ja','Hej','Tack','God dag'], correct: 1 },
+      { type: 'chooseVideo', question: 'Välj rätt tecken', gif: [gifMap.hejDa, gifMap.hej], correct: 1 },
+      { type: 'multipleChoice', question: 'Para ihop rätt', gif: gifMap.godMorgon, options: ['God morgon','TODO','TODO','TODO'], correct: 0 }, //God morgon & Godnatt
+      { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.trevligtAttTraffas, options: ['Jag kommer','Trevligt att träffas','Jag är yngre','Inom kort'], correct: 1 },
+      { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.vadHeterDu, options: ['Hur gjorde du','Vad tror du','Hur gammal är du','Vad heter du'], correct: 3 },
     ]
   },
   {

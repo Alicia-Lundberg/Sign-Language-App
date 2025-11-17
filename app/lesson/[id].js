@@ -1,7 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import DragAndDropQuestion from '../components/questions/ChooseVideo'
+import ChooseVideoQuestion from '../components/questions/ChooseVideoQuestion'
 import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
 import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
@@ -87,8 +87,8 @@ export default function LessonDetail() {
         />
       )}
 
-      {current.type === 'dragAndDrop' && (
-        <DragAndDropQuestion
+      {current.type === 'chooseVideo' && (
+        <ChooseVideoQuestion
           current={current}
           answered={answered}
           correct={correct}
