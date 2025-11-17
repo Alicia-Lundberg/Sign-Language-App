@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import bg from '../../assets/images/path-bg-v3.png';
 import Elk from '../../assets/svgs/elk.svg';
 import Stubbe from '../../assets/svgs/stubbe.svg';
@@ -50,12 +50,12 @@ export default function HomeScreen() {
                   <Elk 
                     width={100} 
                     height={100} 
-                    style={{ position: 'absolute', top: -70, left: -15 }}
+                    style={{ position: 'absolute', top: -50, left: -15 }}
                   />
                 )}
               </TouchableOpacity>
 
-              <Text style={styles.lessonTitle}>{lesson.title}</Text>
+              {/* <Text style={styles.lessonTitle}>{lesson.title}</Text> */}
             </View>
         ))}
         

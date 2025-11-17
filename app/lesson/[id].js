@@ -1,11 +1,13 @@
 import * as Haptics from 'expo-haptics'
 import { router, useLocalSearchParams } from 'expo-router'
+import { X } from 'lucide-react-native'
 import { useState } from 'react'
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import DragAndDropQuestion from '../components/questions/DragAndDropQuestion'
 import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
 import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
+
 
 
 export default function LessonDetail() {
@@ -67,34 +69,39 @@ export default function LessonDetail() {
     <View style={styles.container}>
       <View style={[StyleSheet.absoluteFillObject, { backgroundColor: '#b0d8d7ff', zIndex: -1 }]} />
 
-      <View style={{ width: '100%', paddingTop: 50, paddingHorizontal: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ width: '100%', paddingTop: 50, paddingHorizontal: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         
-        {/* Kryss-knapp*/}
+        {/* Kryss-knapp */}
         <TouchableOpacity
-          style={{ padding: 10 }}
+          style={{
+            padding: 5,
+            //backgroundColor: 'rgba(0,0,0,0.3)', // lite rundad bakgrund
+            borderRadius: 20,                  // gör knappen rund
+          }}
           onPress={() => router.push('/(tabs)/home')}
         >
-          <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'black' }}>✕</Text>
+          <X size={38} color="white" strokeWidth={3} />
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'black', textAlign: 'center', flex: 1 }}>
-          {level.title}
-        </Text>
+        {/* Progress bar */}
+        <View style={{ flex: 1, marginHorizontal: 10, paddingTop: 15 }}>
+          <View style={styles.progressBarBackground}>
+            <View style={[styles.progressBarFill, { width: `${progress}%`, backgroundColor: '#27AE60' }]} />
+          </View>
+        </View>
 
-        <View style={{ width: 44 /* samma som kryss-knappens bredd */ }} />
+        {/* Plats för eventuell framtida ikon/knapp */}
+        <View style={{ width: 44 }} />
       </View>
 
-      {/* Progress bar */}
-      <View style={[styles.progressBarBackground, { marginTop: 30 }]}>
-        <View style={[styles.progressBarFill, { width: `${progress}%`, backgroundColor: '#27AE60' }]} />
-      </View>
+      <Text style={styles.title}>{current.question}</Text>
 
       <Image
         source={current.gif}
-        style={{ width: 300, height: 250 }}
+        style={{ width: 300, height: 250, paddingBottom: 20, borderRadius: 12 }}
       />
 
-      <Text style={styles.question}>{current.question}</Text>
+      
 
 
 
@@ -250,22 +257,27 @@ const styles = StyleSheet.create({
     borderRadius: 12
   },
   question: { fontSize: 18, marginBottom: 20, textAlign: 'center' },
-  optionsGrid: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
-  },
-  optionButton: {
-    width: '48%',
-    padding: 20,
-    marginBottom: 15,
-    borderRadius: 10,
-    backgroundColor: '#40617aff',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  optionText: { color: 'white', fontSize: 18, fontWeight: 'bold' },
+  // optionsGrid: {
+  //   width: '100%',
+  //   flexDirection: 'row',
+  //   flexWrap: 'wrap',
+  //   justifyContent: 'space-between'
+  // },
+  // optionButton: {
+  //   width: '48%',
+  //   padding: 20,
+  //   marginBottom: 15,
+  //   borderRadius: 10,
+  //   backgroundColor: '#40617aff',
+  //   justifyContent: 'center',
+  //   alignItems: 'center'
+  // },
+  // optionText: { 
+  //   color: 'white', 
+  //   fontSize: 18, 
+  //   fontWeight: 'bold',
+  //   textAlign: 'center', 
+  // },
   correct: { backgroundColor: '#27AE60' },
   wrong: { backgroundColor: '#E74C3C' }
 })

@@ -28,8 +28,16 @@ export default function MultipleChoiceQuestion({ current, selectedAnswer, showRe
             style={buttonStyle}
             onPress={() => !showResult && handleAnswer(i)}
           >
-            <Text style={styles.optionText}>{opt}</Text>
+            <Text style={[
+              styles.optionText,
+              showResult && (buttonStyle.includes(styles.correct) || buttonStyle.includes(styles.wrong)) 
+                ? { color: 'white' } 
+                : null
+            ]}>
+              {opt}
+            </Text>
           </TouchableOpacity>
+
         )
       })}
     </View>
@@ -45,6 +53,7 @@ const styles = StyleSheet.create({
   },
   optionButton: {
     width: '48%',
+    minHeight: 100,
     padding: 20,
     marginBottom: 15,
     borderRadius: 10,
@@ -70,16 +79,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white', // behåll vit bakgrund
   },
   correct: {
-    backgroundColor: '#27AE60',
+    backgroundColor: '#83efb7ff',
+    borderWidth: 2,
     borderColor: '#27AE60'
   },
   wrong: {
-    backgroundColor: '#E74C3C',
-    borderWidth: 0
+    backgroundColor: '#f4a2a2ff',
+    borderWidth: 2,
+    borderColor: '#E74C3C'
   },
   optionText: {
-    color: 'black',
+    color: '#393939ff',
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center',
   }
 })
