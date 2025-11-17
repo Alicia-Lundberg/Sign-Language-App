@@ -1,10 +1,11 @@
 import { router, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import DragAndDropQuestion from '../components/questions/DragAndDropQuestion'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import DragAndDropQuestion from '../components/questions/ChooseVideo'
 import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
 import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
+
 
 export default function LessonDetail() {
   const { id } = useLocalSearchParams()
@@ -73,13 +74,8 @@ export default function LessonDetail() {
       {/* <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
         <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
       </View> */}
-      <Image
-        source={current.gif}
-        style={{ width: 300, height: 250 }}
-      />
 
-      <Text style={styles.question}>{current.question}</Text>
-
+      {/* <Text style={styles.question}>{current.question}</Text> */}
 
 
       {current.type === 'multipleChoice' && (
@@ -95,7 +91,8 @@ export default function LessonDetail() {
         <DragAndDropQuestion
           current={current}
           answered={answered}
-          onComplete={() => setAnswered(true)}
+          correct={correct}
+          handleAnswer={handleAnswer}
         />
       )}
 

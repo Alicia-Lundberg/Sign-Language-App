@@ -18,8 +18,8 @@ export const lessonsData = [
     id: 1,
     title: 'Level 1',
     lessons: [
-      { type: 'multipleChoice', question: 'Vad betyder A?', gif: gifMap.hej, options: ['A','B','C','D'], correct: 0 },
-      { type: 'dragAndDrop', question: 'Vad betyder B?', gif: gifMap.hejDa, options: ['A','B','C','D'], correct: 1 },
+      { type: 'multipleChoice', question: 'Vad betyder A?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 0 },
+      { type: 'multipleChoice', question: 'Vad betyder B?', gif: gifMap.hej, options: ['A','B','C','D'], correct: 1 },
       { type: 'multipleChoice', question: 'Vad betyder C?', gif: gifMap.jagHeter, options: ['A','C','B','D'], correct: 1 },
       { type: 'multipleChoice', question: 'Vad är rätt här?', gif: gifMap.jagHeter, options: ['D','E','F','D'], correct: 0 },
       { type: 'multipleChoice', question: 'Vad visas här?', gif: gifMap.jagHeter, options: ['G','E','F','D'], correct: 1 },
