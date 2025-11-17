@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import ChooseVideoQuestion from '../components/questions/ChooseVideoQuestion'
 import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
+import PairQuestion from '../components/questions/PairQuestion'
 import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
 
@@ -89,6 +90,15 @@ export default function LessonDetail() {
 
       {current.type === 'chooseVideo' && (
         <ChooseVideoQuestion
+          current={current}
+          answered={answered}
+          correct={correct}
+          handleAnswer={handleAnswer}
+        />
+      )}
+
+      {current.type === 'pair' && (
+        <PairQuestion
           current={current}
           answered={answered}
           correct={correct}
