@@ -2,9 +2,10 @@ import * as Haptics from 'expo-haptics'
 import { router, useLocalSearchParams } from 'expo-router'
 import { X } from 'lucide-react-native'
 import { useState } from 'react'
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import DragAndDropQuestion from '../components/questions/DragAndDropQuestion'
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import ChooseVideoQuestion from '../components/questions/ChooseVideoQuestion'
 import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
+import PairQuestion from '../components/questions/PairQuestion'
 import { lessonsData } from '../data/lessons'
 
 
@@ -22,7 +23,7 @@ export default function LessonDetail() {
   const [answered, setAnswered] = useState(false)
   const [correct, setCorrect] = useState(false)
 
-  
+
 
   const handleAnswer = (index) => {
     setSelectedAnswer(index);
@@ -33,7 +34,7 @@ export default function LessonDetail() {
     setShowResult(true);         // visa rätt/fel
     setAnswered(true);           // visa fortsätt-knappen
     const isCorrect = selectedAnswer === current.correct;
-    setCorrect(isCorrect);       
+    setCorrect(isCorrect);
     current.userAnswer = selectedAnswer;
 
     if (isCorrect) {
@@ -64,7 +65,7 @@ export default function LessonDetail() {
   }
 
   return (
-    
+
     <View style={styles.container}>
       <View style={[StyleSheet.absoluteFillObject, { backgroundColor: '#b0d8d7ff', zIndex: -1 }]} />
 
@@ -95,10 +96,15 @@ export default function LessonDetail() {
 
       <Text style={styles.title}>{current.question}</Text>
 
-      <Image
-        source={current.gif}
-        style={{ width: 300, height: 250, paddingBottom: 20, borderRadius: 12 }}
-      />
+      {/* <Text style={styles.title}>
+         {level.title} {/*– {step + 1}/{level.lessons.length}
+      </Text> */}
+
+      {/* <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
+      </View> */}
+
+      {/* <Text style={styles.question}>{current.question}</Text> */}
 
       
       {current.type === 'multipleChoice' && (
@@ -112,15 +118,38 @@ export default function LessonDetail() {
         />
       )}
 
+
+
+      {current.type === 'chooseVideo' && (
+        <ChooseVideoQuestion
+          current={current}
+          selectedAnswer={selectedAnswer}
+          // showResult={showResult}
+          // correct={correct}
+          showResult={showResult}
+          handleAnswer={handleAnswer}
+        />
+      )}
+
       {current.type === 'dragAndDrop' && (
         <DragAndDropQuestion
           current={current}
           answered={answered}
-          onComplete={() => setAnswered(true)}
+          correct={correct}
+          handleAnswer={handleAnswer}
         />
       )}
 
-  
+      {current.type === 'pair' && (
+        <PairQuestion
+          current={current}
+          answered={answered}
+          correct={correct}
+          handleAnswer={handleAnswer}
+        />
+      )}
+
+
       {/* Kontrollera knapp längst ner */}
       {!showResult && selectedAnswer !== null && (
         <TouchableOpacity
@@ -141,7 +170,7 @@ export default function LessonDetail() {
             bottom: 0,
             width: screenWidth,
             height: 150,
-            backgroundColor: correct 
+            backgroundColor: correct
               ? '#83efb7ff'  // ljusgrön
               : '#f4a2a2ff', // ljusröd
             borderRadius: 20,
@@ -158,7 +187,7 @@ export default function LessonDetail() {
       )}
 
       {/* FORTSÄTT-KNAPP */}
-      {answered && ( 
+      {answered && (
         <TouchableOpacity
           style={[
             styles.continueButton,
