@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import DragAndDropQuestion from '../components/questions/DragAndDropQuestion'
 import MultipleChoiceQuestion from '../components/questions/MultipleChoiceQuestion'
-import { useProgress } from '../context/ProgressContext'
 import { lessonsData } from '../data/lessons'
 
 
@@ -22,7 +21,7 @@ export default function LessonDetail() {
   const [showResult, setShowResult] = useState(false);
   const [answered, setAnswered] = useState(false)
   const [correct, setCorrect] = useState(false)
-  const { completeLesson } = useProgress()
+
   
 
   const handleAnswer = (index) => {
@@ -49,20 +48,20 @@ export default function LessonDetail() {
   const handleContinue = () => {
     if (step + 1 < level.lessons.length) {
       setStep(step + 1);
-      // reset states för nästa fråga
       setSelectedAnswer(null);
       setShowResult(false);
       setAnswered(false);
       setCorrect(false);
     } else {
-      const allCorrect = level.lessons.every(l => l.userAnswer === l.correct)
-      if (allCorrect) {
-        completeLesson(level.id)
-      }
-      router.push('/(tabs)/home')
+      router.push(`/lesson/result?id=${lessonId}`);
+
+      // const allCorrect = level.lessons.every(l => l.userAnswer === l.correct)
+      // if (allCorrect) {
+      //   completeLesson(level.id)
+      // }
+      //router.push('/(tabs)/home')
     }
   }
-
 
   return (
     
@@ -102,9 +101,6 @@ export default function LessonDetail() {
       />
 
       
-
-
-
       {current.type === 'multipleChoice' && (
         <MultipleChoiceQuestion
           current={current}
@@ -115,8 +111,6 @@ export default function LessonDetail() {
           handleAnswer={handleAnswer}
         />
       )}
-
-    
 
       {current.type === 'dragAndDrop' && (
         <DragAndDropQuestion
@@ -257,27 +251,6 @@ const styles = StyleSheet.create({
     borderRadius: 12
   },
   question: { fontSize: 18, marginBottom: 20, textAlign: 'center' },
-  // optionsGrid: {
-  //   width: '100%',
-  //   flexDirection: 'row',
-  //   flexWrap: 'wrap',
-  //   justifyContent: 'space-between'
-  // },
-  // optionButton: {
-  //   width: '48%',
-  //   padding: 20,
-  //   marginBottom: 15,
-  //   borderRadius: 10,
-  //   backgroundColor: '#40617aff',
-  //   justifyContent: 'center',
-  //   alignItems: 'center'
-  // },
-  // optionText: { 
-  //   color: 'white', 
-  //   fontSize: 18, 
-  //   fontWeight: 'bold',
-  //   textAlign: 'center', 
-  // },
   correct: { backgroundColor: '#27AE60' },
   wrong: { backgroundColor: '#E74C3C' }
 })
