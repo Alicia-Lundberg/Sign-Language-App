@@ -1,11 +1,20 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function MultipleChoiceQuestion({ current, selectedAnswer, showResult, handleAnswer }) {
   return (
-    <View style={styles.optionsGrid}>
-      {current.options.map((opt, i) => {
-        const isSelected = i === selectedAnswer;
-        const isCorrect = i === current.correct;
+    <View style={styles.container}>
+
+      {/* Question text */}
+      <Text style={styles.question}>{current.question}</Text>
+
+      {/* GIF for the current question */}
+      <Image source={current.gif} style={styles.gif} />
+
+      {/* Options */}
+      <View style={styles.optionsGrid}>
+        {current.options.map((opt, i) => {
+          const isSelected = i === selectedAnswer;
+          const isCorrect = i === current.correct;
 
         // Bestäm knappstil
         let buttonStyle = [styles.optionButton];
@@ -41,7 +50,7 @@ export default function MultipleChoiceQuestion({ current, selectedAnswer, showRe
         )
       })}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -51,6 +60,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between'
   },
+
   optionButton: {
     width: '48%',
     minHeight: 100,
