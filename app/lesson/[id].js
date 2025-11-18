@@ -55,12 +55,6 @@ export default function LessonDetail() {
       setCorrect(false);
     } else {
       router.push(`/lesson/result?id=${lessonId}`);
-
-      // const allCorrect = level.lessons.every(l => l.userAnswer === l.correct)
-      // if (allCorrect) {
-      //   completeLesson(level.id)
-      // }
-      //router.push('/(tabs)/home')
     }
   }
 
@@ -111,8 +105,6 @@ export default function LessonDetail() {
         <MultipleChoiceQuestion
           current={current}
           selectedAnswer={selectedAnswer}
-          // showResult={showResult}
-          // correct={correct}
           showResult={showResult}
           handleAnswer={handleAnswer}
         />
@@ -124,8 +116,6 @@ export default function LessonDetail() {
         <ChooseVideoQuestion
           current={current}
           selectedAnswer={selectedAnswer}
-          // showResult={showResult}
-          // correct={correct}
           showResult={showResult}
           handleAnswer={handleAnswer}
         />
