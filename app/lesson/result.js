@@ -10,9 +10,14 @@ export default function LessonResult() {
   const level = lessonsData.find(l => l.id === lessonId);
   const { completeLesson } = useProgress();
 
-  const correctCount = level.lessons.filter(
-    q => q.userAnswer === q.correct
-  ).length;
+  const correctCount = level.lessons.filter(q => {
+    if (q.type === 'pair') {
+      // ensure both sides exist before comparing
+      if (!q.userAnswer || !q.correct) return false;
+      return q.userAnswer.gif === q.correct.gif && q.userAnswer.word === q.correct.word;
+    }
+    return q.userAnswer === q.correct;
+  }).length;
 
   const total = level.lessons.length;
   const allCorrect = correctCount === total;

@@ -1,37 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-export default function MatchExercise({ current }) {
+export default function PairQuestion({ current, setSelectedAnswer, setShowResult }) {
   const [selectedGif, setSelectedGif] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
 
-  const handleGifPress = (index) => {
-    if (selectedGif === index) {
-      setSelectedGif(null);
-    } else {
-      setSelectedGif(index);
-    }
-  };
+  // Check if both are selected
+  const allSelected = selectedGif !== null && selectedWord !== null;
 
-  const handleWordPress = (index) => {
-    if (selectedWord === index) {
-      setSelectedWord(null);
-    } else {
-      setSelectedWord(index);
+  // Whenever both are selected, update LessonDetail state
+  useEffect(() => {
+    if (allSelected) {
+      // Send indices to LessonDetail so checkAnswer can compare reliably.
+      // We intentionally do NOT call setShowResult here — user presses "Kontrollera".
+      setSelectedAnswer({ gif: selectedGif, word: selectedWord });
     }
-  };
+  }, [allSelected, selectedGif, selectedWord]);
+
+  const handleGifPress = (index) => setSelectedGif(index);
+  const handleWordPress = (index) => setSelectedWord(index);
 
   const getGifBorderColor = (index) => {
-    if (selectedGif === index) return '#00BFFF'; 
-    if (selectedGif !== null && selectedWord !== null && index !== selectedGif) return '#FFA500';
-    return '#ccc'; 
+    if (selectedGif === index) return '#00BFFF';
+    if (allSelected && index !== selectedGif) return '#FFA500'; // auto pair the other
+    return '#ccc';
   };
 
   const getWordBorderColor = (index) => {
     if (selectedWord === index) return '#00BFFF';
-    if (selectedGif !== null && selectedWord !== null && index !== selectedWord) return '#FFA500';
+    if (allSelected && index !== selectedWord) return '#FFA500';
     return '#ccc';
   };
 
@@ -40,7 +39,6 @@ export default function MatchExercise({ current }) {
       <Text style={styles.question}>{current.question}</Text>
 
       <View style={styles.row}>
-        {/* GIFs on the left */}
         <View style={styles.leftColumn}>
           {current.gif.map((gif, i) => (
             <TouchableOpacity
@@ -53,7 +51,6 @@ export default function MatchExercise({ current }) {
           ))}
         </View>
 
-        {/* Words on the right */}
         <View style={styles.rightColumn}>
           {current.options.map((word, i) => (
             <TouchableOpacity
@@ -82,7 +79,6 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 12,
     marginBottom: 20,
-    borderColor: '#ccc',
   },
   gif: { width: '100%', height: '100%', borderRadius: 12 },
   word: {
@@ -92,7 +88,6 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 8,
     alignItems: 'center',
-    borderColor: '#ccc',
   },
   wordText: { color: 'white', fontWeight: 'bold', fontSize: 16 },
 });

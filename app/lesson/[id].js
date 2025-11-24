@@ -31,9 +31,30 @@ export default function LessonDetail() {
 
   const checkAnswer = (index) => {
     if (selectedAnswer === null) return;
+
+    let isCorrect = false;
+
+    if (current.type === 'pair') {
+
+      const selGifIndex = typeof selectedAnswer.gif === 'number'
+        ? selectedAnswer.gif
+        : current.gif.findIndex(g => g === selectedAnswer.gif);
+
+      const selWordIndex = typeof selectedAnswer.word === 'number'
+        ? selectedAnswer.word
+        : current.options.findIndex(w => w === selectedAnswer.word);
+
+      isCorrect = current.correct.some(pair =>
+        pair.gif === selGifIndex &&
+        pair.word === selWordIndex
+      );
+    } else {
+      isCorrect = selectedAnswer === current.correct;
+    }
+
     setShowResult(true);         // visa rätt/fel
     setAnswered(true);           // visa fortsätt-knappen
-    const isCorrect = selectedAnswer === current.correct;
+    // const isCorrect = selectedAnswer === current.correct;
     setCorrect(isCorrect);
     current.userAnswer = selectedAnswer;
 
@@ -70,7 +91,7 @@ export default function LessonDetail() {
       <View style={[StyleSheet.absoluteFillObject, { backgroundColor: '#b0d8d7ff', zIndex: -1 }]} />
 
       <View style={{ width: '100%', paddingTop: 50, paddingHorizontal: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        
+
         {/* Kryss-knapp */}
         <TouchableOpacity
           style={{
@@ -106,13 +127,11 @@ export default function LessonDetail() {
 
       {/* <Text style={styles.question}>{current.question}</Text> */}
 
-      
+
       {current.type === 'multipleChoice' && (
         <MultipleChoiceQuestion
           current={current}
           selectedAnswer={selectedAnswer}
-          // showResult={showResult}
-          // correct={correct}
           showResult={showResult}
           handleAnswer={handleAnswer}
         />
@@ -124,18 +143,7 @@ export default function LessonDetail() {
         <ChooseVideoQuestion
           current={current}
           selectedAnswer={selectedAnswer}
-          // showResult={showResult}
-          // correct={correct}
           showResult={showResult}
-          handleAnswer={handleAnswer}
-        />
-      )}
-
-      {current.type === 'dragAndDrop' && (
-        <DragAndDropQuestion
-          current={current}
-          answered={answered}
-          correct={correct}
           handleAnswer={handleAnswer}
         />
       )}
@@ -143,9 +151,8 @@ export default function LessonDetail() {
       {current.type === 'pair' && (
         <PairQuestion
           current={current}
-          answered={answered}
-          correct={correct}
-          handleAnswer={handleAnswer}
+          setSelectedAnswer={setSelectedAnswer}
+          setShowResult={setShowResult}
         />
       )}
 
