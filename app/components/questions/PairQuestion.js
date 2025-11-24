@@ -7,14 +7,10 @@ export default function PairQuestion({ current, setSelectedAnswer, setShowResult
   const [selectedGif, setSelectedGif] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
 
-  // Check if both are selected
   const allSelected = selectedGif !== null && selectedWord !== null;
 
-  // Whenever both are selected, update LessonDetail state
   useEffect(() => {
     if (allSelected) {
-      // Send indices to LessonDetail so checkAnswer can compare reliably.
-      // We intentionally do NOT call setShowResult here — user presses "Kontrollera".
       setSelectedAnswer({ gif: selectedGif, word: selectedWord });
     }
   }, [allSelected, selectedGif, selectedWord]);
@@ -24,7 +20,7 @@ export default function PairQuestion({ current, setSelectedAnswer, setShowResult
 
   const getGifBorderColor = (index) => {
     if (selectedGif === index) return '#00BFFF';
-    if (allSelected && index !== selectedGif) return '#FFA500'; // auto pair the other
+    if (allSelected && index !== selectedGif) return '#FFA500';
     return '#ccc';
   };
 

@@ -36,6 +36,9 @@ export default function LessonDetail() {
 
     if (current.type === 'pair') {
 
+      console.log("selectedAnswer:", selectedAnswer);
+      console.log("current.correct:", current.correct);
+
       const selGifIndex = typeof selectedAnswer.gif === 'number'
         ? selectedAnswer.gif
         : current.gif.findIndex(g => g === selectedAnswer.gif);
@@ -44,10 +47,14 @@ export default function LessonDetail() {
         ? selectedAnswer.word
         : current.options.findIndex(w => w === selectedAnswer.word);
 
+        console.log("selGifIndex:", selGifIndex, "selWordIndex:", selWordIndex);
+
       isCorrect = current.correct.some(pair =>
         pair.gif === selGifIndex &&
         pair.word === selWordIndex
       );
+      console.log("isCorrect:", isCorrect);
+      
     } else {
       isCorrect = selectedAnswer === current.correct;
     }

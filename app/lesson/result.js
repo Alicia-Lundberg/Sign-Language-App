@@ -14,10 +14,12 @@ export default function LessonResult() {
   const { completeLesson } = useProgress();
 
   const correctCount = level.lessons.filter(q => {
+    if (!q.userAnswer || !q.correct) return false;
+
     if (q.type === 'pair') {
-      // ensure both sides exist before comparing
-      if (!q.userAnswer || !q.correct) return false;
-      return q.userAnswer.gif === q.correct.gif && q.userAnswer.word === q.correct.word;
+      return q.correct.some(pair =>
+        pair.gif === q.userAnswer.gif && pair.word === q.userAnswer.word
+      );
     }
     return q.userAnswer === q.correct;
   }).length;
@@ -77,13 +79,13 @@ export default function LessonResult() {
                 top: y,
               }}
             >
-                {/* Skugga bakom */}
-                <FontAwesome
-                    name="star"
-                    size={70}
-                    color="rgba(91, 86, 43, 0.3)"
-                    style={{ position: 'absolute', left: 3, top: 3 }} // förskjutning för 3D effekt
-                />
+              {/* Skugga bakom */}
+              <FontAwesome
+                name="star"
+                size={70}
+                color="rgba(91, 86, 43, 0.3)"
+                style={{ position: 'absolute', left: 3, top: 3 }} // förskjutning för 3D effekt
+              />
               {/* Bakgrundsstjärna i grått */}
               <FontAwesome name="star" size={70} color="#cccccc" />
               {/* Gul stjärna som fylls */}
