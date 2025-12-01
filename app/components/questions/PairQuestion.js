@@ -32,7 +32,7 @@ export default function PairQuestion({ current, setSelectedAnswer, setShowResult
 
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{current.question}</Text>
+      {/* <Text style={styles.question}>{current.question}</Text> */}
 
       <View style={styles.row}>
         <View style={styles.leftColumn}>

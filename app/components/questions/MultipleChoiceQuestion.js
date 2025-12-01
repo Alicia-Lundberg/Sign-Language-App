@@ -3,11 +3,6 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 export default function MultipleChoiceQuestion({ current, selectedAnswer, showResult, handleAnswer }) {
   return (
     <View style={styles.container}>
-
-      {/* Question text */}
-      <Text style={styles.question}>{current.question}</Text>
-
-      {/* GIF for the current question */}
       <Image source={current.gif} style={styles.gif} />
 
       {/* Options */}

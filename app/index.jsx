@@ -8,7 +8,7 @@ export default function Index() {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>APP NAME</Text>
+      <Text style={styles.title}>TECKNA</Text>
       <Elk style={styles.elk}width={elkSize} height={elkSize} />
 
       <TouchableOpacity style={styles.button} onPress={() => router.replace('/(tabs)/home')}>

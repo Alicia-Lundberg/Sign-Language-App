@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 
-export default function ChooseVideoQuestion({ current, answered, correct, handleAnswer }) {
+export default function ChooseVideoQuestion({ current, answered, handleAnswer }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.questionText}>{current.question}</Text>
-
       <View style={styles.videoGrid}>
+
+        {/* Options */}
         {current.gif.map((vid, i) => (
           <TouchableOpacity
             key={i}
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     height: 250,                  
     borderRadius: 15,
     overflow: "hidden",
-    backgroundColor: "#4A90E2",
+    backgroundColor: "#b0d8d7ff",
     justifyContent: "center",
     alignItems: "center"
   },
