@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 
   gif: { width: 300, height: 250, marginBottom: 20 },
 
-  question: { fontSize: 18, marginBottom: 20, textAlign: 'center' },
+
 
   optionsGrid: {
     width: '100%',

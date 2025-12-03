@@ -47,14 +47,14 @@ export default function LessonDetail() {
         ? selectedAnswer.word
         : current.options.findIndex(w => w === selectedAnswer.word);
 
-        console.log("selGifIndex:", selGifIndex, "selWordIndex:", selWordIndex);
+      console.log("selGifIndex:", selGifIndex, "selWordIndex:", selWordIndex);
 
       isCorrect = current.correct.some(pair =>
         pair.gif === selGifIndex &&
         pair.word === selWordIndex
       );
       console.log("isCorrect:", isCorrect);
-      
+
     } else {
       isCorrect = selectedAnswer === current.correct;
     }
@@ -114,6 +114,7 @@ export default function LessonDetail() {
 
         {/* Plats för eventuell framtida ikon/knapp */}
         <View style={{ width: 44 }} />
+
       </View>
 
       <Text style={styles.title}>{current.question}</Text>
@@ -125,9 +126,6 @@ export default function LessonDetail() {
       {/* <View style={[styles.videoPlaceholder, { marginTop: 40 }]}>
         <Text style={{ color: 'white', fontWeight: 'bold' }}>{current.video}</Text>
       </View> */}
-
-      {/* <Text style={styles.question}>{current.question}</Text> */}
-
 
       {current.type === 'multipleChoice' && (
         <MultipleChoiceQuestion
@@ -145,6 +143,7 @@ export default function LessonDetail() {
           current={current}
           selectedAnswer={selectedAnswer}
           showResult={showResult}
+          answered={answered} 
           handleAnswer={handleAnswer}
         />
       )}
@@ -230,6 +229,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 6
   },
+
   continueButtonText: {
     color: 'white',
     fontSize: 20,
@@ -252,6 +252,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 6
   },
+
   checkButtonText: {
     color: 'white',
     fontSize: 20,
@@ -276,8 +277,14 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
 
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    width: '100%',         
+  },
 
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
   videoPlaceholder: {
     width: 300,
     height: 200,
@@ -287,6 +294,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 12
   },
+
   question: { fontSize: 18, marginBottom: 20, textAlign: 'center' },
   correct: { backgroundColor: '#27AE60' },
   wrong: { backgroundColor: '#E74C3C' }

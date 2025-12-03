@@ -20,7 +20,7 @@ export const lessonsData = [
     lessons: [
       { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.hej, options: ['Ja','Hej','Tack','God dag'], correct: 1 },
       { type: 'chooseVideo', question: 'Välj tecknet för "hej"', gif: [gifMap.hejDa, gifMap.hej], correct: 1 },
-      { type: 'pair', question: 'Para ihop rätt', gif: [gifMap.godMorgon, gifMap.godNatt], options: ['God morgon','God natt'],  correct: [{ gif: 0, word: 0 }, { gif: 1, word: 1 }] }, //God morgon & Godnatt
+      { type: 'pair', question: 'Para ihop rätt tecken med rätt ord', gif: [gifMap.godMorgon, gifMap.godNatt], options: ['God morgon','God natt'],  correct: [{ gif: 0, word: 0 }, { gif: 1, word: 1 }] }, //God morgon & Godnatt
       { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.trevligtAttTraffas, options: ['Jag kommer','Trevligt att träffas','Jag är yngre','Inom kort'], correct: 1 },
       { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.vadHeterDu, options: ['Hur gjorde du','Vad tror du','Hur gammal är du','Vad heter du'], correct: 3 },
     ]
