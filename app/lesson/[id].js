@@ -152,7 +152,7 @@ export default function LessonDetail() {
         <PairQuestion
           current={current}
           setSelectedAnswer={setSelectedAnswer}
-          setShowResult={setShowResult}
+          answered={answered}
         />
       )}
 

@@ -3,7 +3,7 @@ import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'rea
 
 const { width } = Dimensions.get('window');
 
-export default function PairQuestion({ current, setSelectedAnswer }) {
+export default function PairQuestion({ current, setSelectedAnswer, answered }) {
   const [selectedGif, setSelectedGif] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
 
@@ -15,8 +15,13 @@ export default function PairQuestion({ current, setSelectedAnswer }) {
     }
   }, [allSelected, selectedGif, selectedWord]);
 
-  const handleGifPress = (index) => setSelectedGif(index);
-  const handleWordPress = (index) => setSelectedWord(index);
+  const handleGifPress = (index) => {
+    if (!answered) setSelectedGif(index);
+  };
+
+  const handleWordPress = (index) => {
+    if (!answered) setSelectedWord(index);
+  };
 
   const getGifBorderColor = (index) => {
     if (selectedGif === index) return '#00BFFF';
@@ -60,6 +65,7 @@ export default function PairQuestion({ current, setSelectedAnswer }) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
