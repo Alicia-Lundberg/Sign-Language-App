@@ -16,6 +16,7 @@ export default function LessonDetail() {
   const lessonId = parseInt(id)
   const level = lessonsData.find(l => l.id === lessonId)
 
+  const [showIntro, setShowIntro] = useState(true)
   const [step, setStep] = useState(0)
   const current = level.lessons[step]
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -84,6 +85,42 @@ export default function LessonDetail() {
     } else {
       router.push(`/lesson/result?id=${lessonId}`);
     }
+  }
+
+  // If on intro screen, show intro
+  if (showIntro) {
+    return (
+      <View style={styles.container}>
+        <View style={[StyleSheet.absoluteFillObject, { backgroundColor: '#b0d8d7ff', zIndex: -1 }]} />
+
+        <TouchableOpacity
+          style={{
+            padding: 5,
+            borderRadius: 20,
+            alignSelf: 'flex-start',
+            marginTop: 50,
+            marginLeft: 20,
+          }}
+          onPress={() => router.push('/(tabs)/home')}
+        >
+          <X size={38} color="white" strokeWidth={3} />
+        </TouchableOpacity>
+
+        <View style={styles.introContainer}>
+          <Text style={styles.introTitle}>{level.title}</Text>
+          <Text style={styles.introDescription}>
+            {level.description || 'Learn new sign language words and phrases in this level.'}
+          </Text>
+          
+          <TouchableOpacity
+            style={styles.startButton}
+            onPress={() => setShowIntro(false)}
+          >
+            <Text style={styles.startButtonText}>Starta</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   }
 
   return (
@@ -213,6 +250,48 @@ export default function LessonDetail() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'flex-start', alignItems: 'center', padding: 20 },
+  
+  introContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+
+  introTitle: {
+    fontSize: 36,
+    color: 'white',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+
+  introDescription: {
+    fontSize: 64,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 40,
+    lineHeight: 24,
+  },
+
+  startButton: {
+    backgroundColor: '#3A7874FF',
+    paddingVertical: 18,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 6,
+  },
+
+  startButtonText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
   continueButton: {
     paddingVertical: 20,
     paddingHorizontal: 40,

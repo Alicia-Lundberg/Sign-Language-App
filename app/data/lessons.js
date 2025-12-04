@@ -17,12 +17,13 @@ export const lessonsData = [
   {
     id: 1,
     title: 'Level 1', //Hälsningsfraser
+    description: 'Hälsningsfraser!',
     lessons: [
-      { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.hej, options: ['Ja','Hej','Tack','God dag'], correct: 1 },
-      { type: 'chooseVideo', question: 'Välj tecknet för "hej"', gif: [gifMap.hejDa, gifMap.hej], correct: 1 },
-      { type: 'pair', question: 'Para ihop rätt tecken med rätt ord', gif: [gifMap.godMorgon, gifMap.godNatt], options: ['God morgon','God natt'],  correct: [{ gif: 0, word: 0 }, { gif: 1, word: 1 }] }, //God morgon & Godnatt
-      { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.trevligtAttTraffas, options: ['Jag kommer','Trevligt att träffas','Jag är yngre','Inom kort'], correct: 1 },
-      { type: 'multipleChoice', question: 'Välj rätt tecken', gif: gifMap.vadHeterDu, options: ['Hur gjorde du','Vad tror du','Hur gammal är du','Vad heter du'], correct: 3 },
+      { type: 'multipleChoice', question: 'Välj rätt tecken!', gif: gifMap.hej, options: ['Ja','Hej','Tack','God dag'], correct: 1 },
+      { type: 'chooseVideo', question: 'Välj tecknet för "Hej"!', gif: [gifMap.hejDa, gifMap.hej], correct: 1 },
+      { type: 'pair', question: 'Para ihop rätt tecken med rätt ord!', gif: [gifMap.godMorgon, gifMap.godNatt], options: ['God morgon','God natt'],  correct: [{ gif: 0, word: 0 }, { gif: 1, word: 1 }] }, //God morgon & Godnatt
+      { type: 'multipleChoice', question: 'Välj rätt tecken!', gif: gifMap.trevligtAttTraffas, options: ['Jag kommer','Trevligt att träffas','Jag är yngre','Inom kort'], correct: 1 },
+      { type: 'multipleChoice', question: 'Välj rätt tecken!', gif: gifMap.vadHeterDu, options: ['Hur gjorde du','Vad tror du','Hur gammal är du','Vad heter du'], correct: 3 },
     ]
   },
 
@@ -30,6 +31,7 @@ export const lessonsData = [
   {
     id: 2,
     title: 'Level 2', //Fri text träna på det man gjorde på första
+    description: 'Level 2',
     lessons: [
       { type: 'multipleChoice', question: 'Vad betyder A?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 0 },
       { type: 'multipleChoice', question: 'Vad betyder B?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 1 },
@@ -41,6 +43,7 @@ export const lessonsData = [
   {
     id: 3,
     title: 'Level 3',
+    description: 'Level 3',
     lessons: [
       { type: 'multipleChoice', question: 'Vad betyder A?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 0 },
       { type: 'multipleChoice', question: 'Vad betyder B?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 1 },
