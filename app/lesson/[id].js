@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons'
 import * as Haptics from 'expo-haptics'
 import { router, useLocalSearchParams } from 'expo-router'
 import { X } from 'lucide-react-native'
@@ -169,29 +170,53 @@ export default function LessonDetail() {
 
 
 
-      {/* Popup-rutan bakom fortsätt-knappen */}
-      {answered && (
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: screenWidth,
-            height: 150,
-            backgroundColor: correct
-              ? '#83efb7ff'  // ljusgrön
-              : '#f4a2a2ff', // ljusröd
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 6,
-            // Elevation för Android
-            elevation: 8,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+    {/* Popup-rutan bakom fortsätt-knappen */}
+    {answered && (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          width: screenWidth,
+          height: 170,
+          backgroundColor: correct
+            ? '#aaf0ccff'  // ljusgrön
+            : '#f1b7b7ff', // ljusröd
+          borderRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 6,
+          // Elevation för Android
+          elevation: 8,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {/* Text högst upp till vänster */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', top: 7, left: 15 }}>
+        <FontAwesome 
+          name={correct ? 'check' : 'times'} 
+          size={25} 
+          color={correct ? '#27AE60' : '#E74C3C'} 
+          style={{ marginRight: 10 }} 
         />
-      )}
+        <Text style={{
+          position: 'absolute',
+          top: 1,
+          left: 30,
+          fontSize: 18,
+          fontWeight: 'bold',
+          color: correct ? '#27AE60' : '#E74C3C',
+        }}>
+          {correct
+        ? 'Rätt svar!'
+        : (current.correct !== undefined && Array.isArray(current.options) && current.options[current.correct] !== undefined)
+          ? `Fel, korrekt svar är: ${current.options[current.correct]}`
+          : 'Fel!'}
+        </Text>
+      </View>
+      </View>
+    )}
 
       {/* FORTSÄTT-KNAPP */}
       {answered && (

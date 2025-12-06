@@ -132,34 +132,85 @@ export default function LessonResult() {
         Du fick {correctCount} av {total} rätt
       </Text>
 
-      {/* Knapp */}
+      {/* Knappar längst ner */}
+  {allCorrect ? (
+    <TouchableOpacity
+      onPress={() => {
+        completeLesson(level.id, starsFilled);
+        router.push('/(tabs)/home');
+      }}
+      style={{
+        position: 'absolute',
+        bottom: 50,
+        paddingVertical: 20,
+        paddingHorizontal: 50,
+        borderRadius: 15,
+        backgroundColor: '#27AE60',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 6,
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: '70%',
+      }}
+    >
+      <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>Gå vidare</Text>
+    </TouchableOpacity>
+  ) : (
+    <View style={{ position: 'absolute', bottom: 50, width: '100%', alignItems: 'center' }}>
       <TouchableOpacity
         onPress={() => {
-          if (allCorrect) {
-            completeLesson(level.id);
-            router.push('/(tabs)/home');
-          } else {
-            level.lessons.forEach(l => delete l.userAnswer);
-            router.push(`/lesson/${lessonId}`);
-          }
+          level.lessons.forEach(l => delete l.userAnswer);
+          router.push(`/lesson/${lessonId}`);
         }}
         style={{
-          marginTop: 50,
+          marginBottom: 20,
           paddingVertical: 20,
           paddingHorizontal: 50,
           borderRadius: 15,
-          backgroundColor: allCorrect ? '#27AE60' : '#E74C3C',
+          backgroundColor: '#E74C3C',
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.3,
           shadowRadius: 4,
           elevation: 6,
+          alignItems: 'center',
+          width: '90%',
         }}
       >
-        <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold' }}>
-          {allCorrect ? 'Gå vidare' : 'Försök igen'}
-        </Text>
+        <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>Försök igen</Text>
       </TouchableOpacity>
+
+      {starsFilled > 0 && (
+        <TouchableOpacity
+          onPress={() => {
+            completeLesson(level.id, starsFilled)
+            router.push('/(tabs)/home')
+          }}
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 50,
+            borderRadius: 15,
+            backgroundColor: '#3A7874FF',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+            elevation: 6,
+            alignItems: 'center',
+            width: '90%',
+          }}
+        >
+          <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>Gå vidare ändå</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  )}
     </View>
   );
+
+
 }
+      

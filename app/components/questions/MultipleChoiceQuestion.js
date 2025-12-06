@@ -32,6 +32,7 @@ export default function MultipleChoiceQuestion({ current, selectedAnswer, showRe
               style={buttonStyle}
               onPress={() => !showResult && handleAnswer(i)}
             >
+              
               <Text
                 style={[
                   styles.optionText,
@@ -86,24 +87,25 @@ const styles = StyleSheet.create({
 
   selected: {
     borderColor: '#40617aff',
-    borderWidth: 2
+    borderWidth: 4
   },
 
   correctBorder: {
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: '#27AE60',
     backgroundColor: 'white',
+    borderStyle: 'dashed', // gör border streckad
   },
 
   correct: {
     backgroundColor: '#83efb7ff',
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: '#27AE60'
   },
 
   wrong: {
     backgroundColor: '#f4a2a2ff',
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: '#E74C3C'
   },
 
