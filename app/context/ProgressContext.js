@@ -9,15 +9,17 @@ export const ProgressProvider = ({ children }) => {
   const [lessons, setLessons] = useState(levelsData)
 
   // Funktion för att markera en level som klar
-  const completeLesson = (id) => {
-    setLessons(prev =>
-      prev.map((l) => {
-        if (l.id === id) return { ...l, completed: true }
-        if (l.id === id + 1) return { ...l, unlocked: true } // låser upp nästa level
-        return l
-      })
-    )
-  }
+  const completeLesson = (id, stars = 0) => {
+  setLessons(prev =>
+    prev.map((l) => {
+      if (l.id === id) return { ...l, completed: true, stars };
+      if (l.id === id + 1 && stars >= 1) return { ...l, unlocked: true }; // låser upp nästa level om minst 1 stjärna
+      return l;
+    })
+  );
+
+
+}
 
   return (
     <ProgressContext.Provider value={{ lessons, completeLesson }}>

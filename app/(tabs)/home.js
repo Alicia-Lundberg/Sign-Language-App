@@ -1,11 +1,14 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import Lock from '../../assets/images/lock.png';
 import bg from '../../assets/images/path-bg-v3.png';
 import BlackBubble from '../../assets/svgs/BlackBubble.svg';
 import Elk from '../../assets/svgs/elk.svg';
 import Stubbe from '../../assets/svgs/stubbe.svg';
 import { useProgress } from '../context/ProgressContext';
+
 
 export default function HomeScreen() {
   const { lessons } = useProgress();
@@ -52,14 +55,60 @@ export default function HomeScreen() {
                 alignItems: 'center',
               }}
             >
-              <TouchableOpacity onPress={() => handlePress(lesson)} style={{ alignItems: 'center' }}>
-                <Stubbe 
-                  width={70} 
-                  height={70} 
-                  style={{ opacity: lesson.unlocked ? 1 : 0.5 }}
-                />
+            {/* Stjärnorna ovanför varje Stubbe */}
+            <View style={{
+              flexDirection: 'row',
+              transform: [
+                { translateY: lesson.id === nextUnlockedLesson?.id ? -47 : 0 } // flytta raden upp om älgen sitter här
+              ]
+            }}>
+              {[0, 1, 2].map(i => {
+                const color = i < (lesson.stars || 0) ? '#FFD700' : '#cccccc'; // gul eller grå
 
-                {lesson.id === nextUnlockedLesson?.id && (
+    return (
+      <View key={i} style={{ marginHorizontal: 1 }}>
+        {/* Skugga bakom */}
+        <FontAwesome
+          name="star"
+          size={20}
+          color="rgba(53, 40, 20, 0.3)"
+          style={{ position: 'absolute', left: 2, top: 2 }}
+        />
+        {/* Själva stjärnan */}
+        <FontAwesome
+          name="star"
+          size={20}
+          color={color}
+        />
+      </View>
+        )
+      })}
+    </View>
+
+
+        <TouchableOpacity onPress={() => handlePress(lesson)} style={{ alignItems: 'center' }}>
+          <Stubbe 
+            width={70} 
+            height={70} 
+            style={{ opacity: lesson.unlocked ? 1 : 0.5 }}
+          />
+
+          {/* Lås på stubbe om låst */}
+          {!lesson.unlocked && (
+            <Image
+              source={Lock}
+              style={{
+                position: 'absolute',
+                width: 29,
+                height: 29,
+                top: 12,
+                left: 20,
+                opacity: 0.5,
+              }}
+            />
+          )}
+
+          {lesson.id === nextUnlockedLesson?.id && (
                   <Elk 
                     width={100} 
                     height={100} 
@@ -81,12 +130,11 @@ export default function HomeScreen() {
 
                 )}
               </TouchableOpacity>
-              
 
-              {/* <Text style={styles.lessonTitle}>{lesson.title}</Text> */}
-            </View>
-        ))}
-        
+        {/* <Text style={styles.lessonTitle}>{lesson.title}</Text> */}
+      </View>
+  ))}
+  
       </ImageBackground>
     </ScrollView>
   );
