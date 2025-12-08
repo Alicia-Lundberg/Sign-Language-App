@@ -41,7 +41,7 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  text: { marginBottom: 30, fontWeight: 'bold' },
+  text: { marginBottom: 10, fontWeight: 'bold' },
   adjustButton: {
     padding: 10,
     backgroundColor: '#3A7874FF',
@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#E74C3C',
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 10,
   },
   buttonText: { color: 'white', fontWeight: 'bold' },
 
   infoText: { 
-  marginBottom: 30, 
+  marginBottom: 10, 
   fontSize: 16,
   color: '#666'
 },

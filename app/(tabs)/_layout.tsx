@@ -24,13 +24,13 @@ export default function TabsLayout() {
       }}
     >
       
-      {/* <Tabs.Screen
+      <Tabs.Screen
         name="lessons"
         options={{
           title: 'Lektioner',
           tabBarIcon: ({ color, size }) => <Ionicons name="book" size={size} color={color} />
         }}
-      /> */}
+      />
 
       <Tabs.Screen 
         name="home"
