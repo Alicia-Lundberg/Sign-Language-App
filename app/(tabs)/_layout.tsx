@@ -27,7 +27,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="lessons"
         options={{
-          title: 'Lessons',
+          title: 'Lektioner',
           tabBarIcon: ({ color, size }) => <Ionicons name="book" size={size} color={color} />
         }}
       />
@@ -35,7 +35,7 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="home"
         options={{
-          title: 'Home',
+          title: 'Hem',
           tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />
         }}
       />
@@ -43,7 +43,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: 'Profil',
           tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />
         }}
       />

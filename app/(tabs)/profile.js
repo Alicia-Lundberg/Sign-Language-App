@@ -11,14 +11,16 @@ export default function ProfileScreen() {
     router.replace('/') // tillbaka till login och ta bort historiken
   }
 
-  const resetTextSize = () => setTextSize(22) // standardstorlek
+  const resetTextSize = () => setTextSize(30) // standardstorlek
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, { fontSize: textSize }]}>Profile Page</Text>
+      <Text style={[styles.text, { fontSize: 30 }]}>Profil</Text>
+
+      <Text style={[styles.infoText, { fontSize: textSize - 4 }]}>Sidan är fortfarande under utveckling</Text>
 
       {/* Knappar för att ändra textstorlek */}
-      <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+      {/* <View style={{ flexDirection: 'row', marginBottom: 20 }}>
         <TouchableOpacity style={styles.adjustButton} onPress={() => setTextSize(textSize + 2)}>
           <Text style={styles.adjustButtonText}>+ Större text</Text>
         </TouchableOpacity>
@@ -28,7 +30,7 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.adjustButton} onPress={resetTextSize}>
           <Text style={styles.adjustButtonText}>Reset</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={[styles.buttonText, { fontSize: textSize - 4 }]}>Logga ut</Text>
@@ -54,4 +56,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: { color: 'white', fontWeight: 'bold' },
+
+  infoText: { 
+  marginBottom: 30, 
+  fontSize: 16,
+  color: '#666'
+},
 })
