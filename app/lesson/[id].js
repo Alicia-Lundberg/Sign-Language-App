@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   introTitle: {
     fontSize: 36,
     color: 'white',
-    marginBottom: 20,
+    marginBottom: 40,
     textAlign: 'center',
   },
 
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
-    marginBottom: 40,
+    marginBottom: 60,
     lineHeight: 24,
   },
 

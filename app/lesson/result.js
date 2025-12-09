@@ -14,7 +14,7 @@ export default function LessonResult() {
   const { completeLesson } = useProgress();
 
   const correctCount = level.lessons.filter(q => {
-    if (!q.userAnswer || !q.correct) return false;
+    if (q.userAnswer === null || q.userAnswer === undefined || q.correct === null || q.correct === undefined) return false;
 
     if (q.type === 'pair') {
       return q.correct.some(pair =>
