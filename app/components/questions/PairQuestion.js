@@ -66,7 +66,6 @@ export default function PairQuestion({ current, setSelectedAnswer, answered }) {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
