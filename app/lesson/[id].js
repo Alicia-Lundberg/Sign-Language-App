@@ -26,7 +26,6 @@ export default function LessonDetail() {
   const [correct, setCorrect] = useState(false)
 
 
-
   const handleAnswer = (index) => {
     setSelectedAnswer(index);
   }
@@ -341,7 +340,7 @@ const styles = StyleSheet.create({
   },
 
   checkButton: {
-    backgroundColor: '#3A7874FF', // blå
+    backgroundColor: '#3a7874ff', // blå
     paddingVertical: 20,
     paddingHorizontal: 40,
     borderRadius: 12,
