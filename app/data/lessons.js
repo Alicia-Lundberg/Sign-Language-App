@@ -11,6 +11,16 @@ export const gifMap = {
   godNatt: require('../../assets/gifs/level_1/god-natt.gif'),
   trevligtAttTraffas: require('../../assets/gifs/level_1/trevligt-att-traffas.gif'),
   //level 2
+  alg: require('../../assets/gifs/level_2/alg-tecken.gif'),
+  djur: require('../../assets/gifs/level_2/djur-tecken.gif'),
+  fågel: require('../../assets/gifs/level_2/fågel-tecken.gif'),
+  fisk: require('../../assets/gifs/level_2/fisk-tecken.gif'),
+  hast: require('../../assets/gifs/level_2/hast-tecken.gif'),
+  hund: require('../../assets/gifs/level_2/hund-tecken.gif'),
+  husdjur: require('../../assets/gifs/level_2/husdjur-tecken.gif'),
+  kanin: require('../../assets/gifs/level_2/kanin-tecken.gif'),
+  katt: require('../../assets/gifs/level_2/katt-tecken.gif'),
+  
 }
 
 export const lessonsData = [
@@ -30,14 +40,14 @@ export const lessonsData = [
 
   {
     id: 2,
-    title: 'Level 2', //Fri text träna på det man gjorde på första
-    description: 'Level 2',
+    title: 'Level 2', //Djur
+    description: 'Djur!',
     lessons: [
-      { type: 'multipleChoice', question: 'Vad betyder A?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 0 },
-      { type: 'multipleChoice', question: 'Vad betyder B?', gif: gifMap.jagHeter, options: ['A','B','C','D'], correct: 1 },
-      { type: 'multipleChoice', question: 'Vad betyder C?', gif: gifMap.jagHeter, options: ['A','C','B','D'], correct: 1 },
-      { type: 'multipleChoice', question: 'Vad är rätt här?', gif: gifMap.jagHeter, options: ['D','E','F','D'], correct: 0 },
-      { type: 'multipleChoice', question: 'Vad visas här?', gif: gifMap.jagHeter, options: ['G','E','F','D'], correct: 1 },
+      { type: 'multipleChoice', question: 'Välj rätt tecken!', gif: gifMap.djur, options: ['Djur','Katt','Älg','Kanin'], correct: 0 },
+      { type: 'pair', question: 'Para ihop rätt tecken med rätt ord!', gif: [gifMap.fisk, gifMap.kanin], options: ['Kanin','Fisk'],  correct: [{ gif: 0, word: 1 }, { gif: 1, word: 0 }] },
+      { type: 'chooseVideo', question: 'Välj tecknet för "Katt"!', gif: [gifMap.katt, gifMap.hast], correct: 0 },
+      { type: 'chooseVideo', question: 'Välj tecknet för "Husdjur"!', gif: [gifMap.fågel, gifMap.husdjur], correct: 1 },
+      { type: 'pair', question: 'Para ihop rätt tecken med rätt ord!', gif: [gifMap.alg, gifMap.hund], options: ['Älg','Hund'],  correct: [{ gif: 0, word: 0 }, { gif: 1, word: 1 }] },
     ]
   },
   {
