@@ -3,7 +3,7 @@ export default function LessonsScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lektioner</Text>
-      <Text style={styles.infoText}>Sidan är fortfarande under utveckling</Text>
+      <Text style={styles.infoText}>Sidan är under utveckling</Text>
     </View>
   )
 }

@@ -17,7 +17,7 @@ export default function ProfileScreen() {
     <View style={styles.container}>
       <Text style={[styles.text, { fontSize: 30 }]}>Profil</Text>
 
-      <Text style={[styles.infoText, { fontSize: textSize - 4 }]}>Sidan är fortfarande under utveckling</Text>
+      <Text style={[styles.infoText, { fontSize: textSize - 4 }]}>Sidan är under utveckling</Text>
 
       {/* Knappar för att ändra textstorlek */}
       {/* <View style={{ flexDirection: 'row', marginBottom: 20 }}>

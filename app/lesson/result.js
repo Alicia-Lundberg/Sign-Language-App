@@ -203,7 +203,7 @@ export default function LessonResult() {
             width: '90%',
           }}
         >
-          <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>Gå vidare ändå</Text>
+          <Text style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>Gå vidare</Text>
         </TouchableOpacity>
       )}
     </View>

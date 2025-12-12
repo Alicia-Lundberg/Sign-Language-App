@@ -2,9 +2,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import Bubble from '../../assets/images/bubble.png';
 import Lock from '../../assets/images/lock.png';
 import bg from '../../assets/images/path-bg-v3.png';
-import BlackBubble from '../../assets/svgs/BlackBubble.svg';
 import Elk from '../../assets/svgs/elk.svg';
 import Stubbe from '../../assets/svgs/stubbe.svg';
 import { useProgress } from '../context/ProgressContext';
@@ -34,7 +34,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowWelcomeImage(false);
-    }, 5000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -119,8 +119,9 @@ export default function HomeScreen() {
                 {/* Show welcome image for first level only, first 5 seconds */}
                 {lesson.id === 1 && showWelcomeImage && !lesson.completed && (
                   // Black bubble
-                  <View style={{ position: 'absolute', top: -300, right:-300, pointerEvents: 'none' }}>
-                    <BlackBubble width={500} height={500} />
+                  <View style={{ position: 'absolute', top: -130, right:-120, pointerEvents: 'none' }}>
+                    <Image source= {Bubble} 
+                    style={{width: 120, height: 90}} />
                   </View>
 
                   // White Bubble 

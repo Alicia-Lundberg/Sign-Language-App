@@ -21,7 +21,7 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#b0d8d7ff' }, // ljusblå bakgrund
-  title: { color: 'white', fontSize: 32, marginVertical: 40, textAlign: 'center' },
+  title: { color: 'white', fontSize: 70, marginVertical: 40, textAlign: 'center', fontWeight: 'bold'  },
   button: { padding: 20, width: 300, alignItems: 'center', backgroundColor: '#3A7874FF', borderRadius: 12 },
   buttonText: { color: 'white', fontSize: 20, fontWeight: 'bold' },
   elk: { marginBottom: 40 },

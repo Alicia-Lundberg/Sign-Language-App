@@ -155,6 +155,7 @@ export default function LessonDetail() {
       </View>
 
       <Text style={styles.title}>{current.question}</Text>
+      <Text style={styles.Text}>{current.questionDescr}</Text>
 
       {/* <Text style={styles.title}>
          {level.title} {/*– {step + 1}/{level.lessons.length}
@@ -283,19 +284,19 @@ const styles = StyleSheet.create({
   },
 
   introTitle: {
-    fontSize: 36,
+    fontSize: 24,
     color: 'white',
     marginBottom: 40,
     textAlign: 'center',
   },
 
   introDescription: {
-    fontSize: 64,
+    fontSize: 39,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
     marginBottom: 60,
-    lineHeight: 24,
+    lineHeight: 40,
   },
 
   startButton: {
@@ -399,6 +400,7 @@ const styles = StyleSheet.create({
   },
 
   question: { fontSize: 18, marginBottom: 20, textAlign: 'center' },
+  questionDescr: { fontSize: 11, marginBottom: 4, textAlign: 'center' },
   correct: { backgroundColor: '#27AE60' },
   wrong: { backgroundColor: '#E74C3C' }
 })

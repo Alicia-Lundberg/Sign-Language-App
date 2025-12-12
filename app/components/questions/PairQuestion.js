@@ -23,16 +23,34 @@ export default function PairQuestion({ current, setSelectedAnswer, answered }) {
     if (!answered) setSelectedWord(index);
   };
 
-  const getGifBorderColor = (index) => {
-    if (selectedGif === index) return '#00BFFF';
-    if (allSelected && index !== selectedGif) return '#FFA500';
-    return '#b0d8d7ff';
+  const getGifStyles = (index) => {
+    let borderColor = '#3a7874ff';  
+    let backgroundColor = '#b0d8d7ff'; 
+
+    if (selectedGif === index) {
+      borderColor = '#00BFFF';
+      backgroundColor = '#00BFFF';
+    } else if (allSelected && index !== selectedGif) {
+      borderColor = '#FFA500';
+      backgroundColor = '#FFA500';
+    }
+
+    return { borderColor, backgroundColor };
   };
 
-  const getWordBorderColor = (index) => {
-    if (selectedWord === index) return '#00BFFF';
-    if (allSelected && index !== selectedWord) return '#FFA500';
-    return '#3A7874FF';
+  const getWordStyles = (index) => {
+    let borderColor = '#3a7874ff';
+    let backgroundColor = '#3A7874FF';
+
+    if (selectedWord === index) {
+      borderColor = '#00BFFF';
+      backgroundColor = '#00BFFF';
+    } else if (allSelected && index !== selectedWord) {
+      borderColor = '#FFA500';
+      backgroundColor = '#FFA500';
+    }
+
+    return { borderColor, backgroundColor };
   };
 
   return (
@@ -43,7 +61,7 @@ export default function PairQuestion({ current, setSelectedAnswer, answered }) {
           <TouchableOpacity
             key={i}
             onPress={() => handleGifPress(i)}
-            style={[styles.target, { borderColor: getGifBorderColor(i), backgroundColor: getGifBorderColor(i) }]}
+            style={[styles.target, getGifStyles(i)]}
           >
             <Image source={gif} style={styles.gif} />
           </TouchableOpacity>
@@ -56,7 +74,7 @@ export default function PairQuestion({ current, setSelectedAnswer, answered }) {
           <TouchableOpacity
             key={i}
             onPress={() => handleWordPress(i)}
-            style={[styles.word, { borderColor: getWordBorderColor(i), backgroundColor: getWordBorderColor(i) }]}
+            style={[styles.word, getWordStyles(i)]}
           >
             <Text style={styles.wordText}>{word}</Text>
           </TouchableOpacity>
@@ -69,7 +87,7 @@ export default function PairQuestion({ current, setSelectedAnswer, answered }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between', // GIFs in middle, words at bottom
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 20,
   },
@@ -77,13 +95,13 @@ const styles = StyleSheet.create({
   gifContainer: {
     width: '100%',
     flex: 1,
-    justifyContent: 'center',  // vertical center
-    alignItems: 'center',      // horizontal center
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   target: {
-    width: width * 0.5,        // smaller width to prevent vertical strips
-    height: width * 0.5,       // keep GIF square
+    width: width * 0.5,
+    height: width * 0.5,
     borderWidth: 3,
     borderRadius: 12,
     justifyContent: 'center',
@@ -95,14 +113,14 @@ const styles = StyleSheet.create({
     width: '140%',
     height: '100%',
     borderRadius: 12,
-    resizeMode: 'contain',      // preserve aspect ratio
+    resizeMode: 'contain',
   },
 
   wordsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    marginBottom: 130,           // move words a bit up from bottom
+    marginBottom: 130,
     paddingHorizontal: 10,
   },
 
@@ -110,7 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 5,
     padding: 15,
-    backgroundColor: '#3A7874FF',
     borderWidth: 3,
     borderRadius: 8,
     alignItems: 'center',
